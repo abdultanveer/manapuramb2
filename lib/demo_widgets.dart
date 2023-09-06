@@ -13,12 +13,17 @@ class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         BlueBox(),
-        BlueBox(),
-        BlueBox()
+        Flexible(
+          flex:2 , fit: FlexFit.tight,
+            child: BlueBox()),
+        Flexible(
+            flex: 1,
+            fit: FlexFit.tight,
+            child: BlueBox())
       ],
     );
   }
