@@ -12,9 +12,25 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Text("hello world")
+          Text("hello world"),
+          buildTitleSection(),
         ],
       ),
+    );
+  }
+  
+  Row buildTitleSection(){
+    return Row(
+      children: [
+        Column(
+          children: [
+            Text("lake compound"),
+            Text("switzerland")
+          ],
+        ),
+        Icon(Icons.star),
+        Text("41")
+      ],
     );
   }
 }
