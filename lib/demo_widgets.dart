@@ -14,16 +14,14 @@ class MyWidget extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         BlueBox(),
-        Flexible(
-          flex:2 , fit: FlexFit.tight,
+        const SizedBox(width: 50),
+        SizedBox(
+          width: 100,
+            height: 100,
             child: BlueBox()),
-        Flexible(
-            flex: 1,
-            fit: FlexFit.tight,
-            child: BlueBox())
+        BlueBox()
       ],
     );
   }
