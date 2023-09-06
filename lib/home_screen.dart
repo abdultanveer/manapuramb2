@@ -12,14 +12,15 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Image.asset('images/lake.jpg', width: 640,height: 240,),
+          Image.asset('images/lake.jpg', width: 640, height: 240,),
           buildTitleSection(),
-          buildButtonSection()
+          buildButtonSection(),
+          textSection
         ],
       ),
     );
   }
-  
+}
   Widget buildTitleSection(){
     return Container(
       padding: const EdgeInsets.all(32),
@@ -54,6 +55,8 @@ class HomeScreen extends StatelessWidget {
 
   Row buildButtonSection(){
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
       children: [
         buildButtonColumn(Icons.call,"call"),
         buildButtonColumn(Icons.route,"route"),
@@ -64,10 +67,32 @@ class HomeScreen extends StatelessWidget {
 
   Column buildButtonColumn(IconData icon, String label){
     return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(icon),
-        Text(label)
+        Container(
+            margin: const EdgeInsets.only(top: 8),
+            child: Text(label,style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+
+            ),)
+        )
       ],
     );
   }
-}
+
+  Widget textSection = Container(
+    padding: const EdgeInsets.all(32),
+    child: const Text(
+      'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
+          'Alps. Situated 1,578 meters above sea level, it is one of the '
+          'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
+          'half-hour walk through pastures and pine forest, leads you to the '
+          'lake, which warms to 20 degrees Celsius in the summer. Activities '
+          'enjoyed here include rowing, and riding the summer toboggan run.',
+      softWrap: true,
+    ),
+  );
+
