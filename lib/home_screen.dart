@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manapuramb2/widgets/fav_widget.dart';
 
 void main() => runApp(MaterialApp(
     home: HomeScreen(),
@@ -46,8 +47,7 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-          Icon(Icons.star, color: Colors.red,),
-          Text("41")
+          FavoriteWidget(),
         ],
       ),
     );
