@@ -42,6 +42,9 @@ class _MyCustomFormState extends State<MyCustomForm> {
 
         ),
         TextFormField(
+          onChanged: (text){
+            print('First text field: $text (${text.characters.length})');
+          },
           decoration: InputDecoration(
             border: UnderlineInputBorder(),
             labelText: 'enter user name'
