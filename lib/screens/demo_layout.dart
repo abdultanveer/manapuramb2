@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manapuramb2/widgets/fav_widget.dart';
 
 
 void main() {
@@ -35,8 +36,7 @@ Widget _titleSection (){
           Text("switzerland")
         ],
       ),
-      Icon(Icons.star, color: Colors.red,),
-      Text("41")
+      FavoriteWidget()
     ],
   );
 }

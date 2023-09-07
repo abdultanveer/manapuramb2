@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+void main()=> runApp(MaterialApp(
+  home: Scaffold(
+    body: FavoriteWidget(),
+  ),
+));
+
+
 class FavoriteWidget extends StatefulWidget {
   const FavoriteWidget({super.key});
 
