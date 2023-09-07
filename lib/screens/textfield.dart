@@ -23,6 +23,7 @@ class MyCustomForm extends StatefulWidget {
 
 class _MyCustomFormState extends State<MyCustomForm> {
   final myController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -32,36 +33,58 @@ class _MyCustomFormState extends State<MyCustomForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextField(
-          decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: 'enter search term'
-        ), controller: myController,
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          TextField(
+            decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            hintText: 'enter search term'
+          ), controller: myController,
 
-        ),
-        TextFormField(
-          onChanged: (text){
-            print('First text field: $text (${text.characters.length})');
-          },
-          decoration: InputDecoration(
-            border: UnderlineInputBorder(),
-            labelText: 'enter user name'
           ),
-        ),
-        ElevatedButton(
-          onPressed: (){
-            showDialog(context: context,
-                builder: (context){
-              return AlertDialog(content: Text(myController.text));
-                });
-          },
-          child: Icon(
-    Icons.text_fields
-    ))
-      ],
+          TextFormField(
+            validator: (text){
+
+              if (text == null || text.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            }
+            ,onChanged: (text){
+              print('First text field: $text (${text.characters.length})');
+            },
+            decoration: InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'enter user name'
+            ),
+          ),
+          ElevatedButton(
+            onPressed: (){
+              validateMyFields(context,_formKey);
+              showDialog(context: context,
+                  builder: (context){
+                return AlertDialog(content: Text(myController.text));
+                  });
+            },
+            child: Icon(
+      Icons.text_fields
+      ))
+        ],
+      ),
     );
   }
 }
+
+void validateMyFields(BuildContext context, GlobalKey<FormState> formKey) {
+  if (formKey.currentState!.validate()) {
+    // If the form is valid, display a snackbar. In the real world,
+    // you'd often call a server or save the information in a database.
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Processing Data')),
+    );
+  }
+}
+
 
