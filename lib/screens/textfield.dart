@@ -22,20 +22,41 @@ class MyCustomForm extends StatefulWidget {
 }
 
 class _MyCustomFormState extends State<MyCustomForm> {
+  final myController = TextEditingController();
+
+  @override
+  void dispose() {
+    myController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextField(decoration: InputDecoration(
+        TextField(
+          decoration: InputDecoration(
           border: OutlineInputBorder(),
           hintText: 'enter search term'
-        ),),
+        ), controller: myController,
+
+        ),
         TextFormField(
           decoration: InputDecoration(
             border: UnderlineInputBorder(),
             labelText: 'enter user name'
           ),
-        )
+        ),
+        ElevatedButton(
+          onPressed: (){
+            showDialog(context: context,
+                builder: (context){
+              return AlertDialog(content: Text(myController.text));
+                });
+          },
+          child: Icon(
+    Icons.text_fields
+    ))
       ],
     );
   }
