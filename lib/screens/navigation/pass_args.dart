@@ -14,18 +14,26 @@ class PassArgsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = TextEditingController();
     return Scaffold(
       appBar: AppBar(title: Text('pass args'),),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: (){
-            Navigator.pushNamed(
-                context,
-                ExtractScreenArgs.routeName,
-                arguments: ScreenArgsBox("my title","my message"));
-          },
-          child: Text('send data'),
-        ),
+      body: Column(
+        children: [
+          TextField(
+            controller: controller,
+          ),
+          Center(
+            child: ElevatedButton(
+              onPressed: (){
+                Navigator.pushNamed(
+                    context,
+                    ExtractScreenArgs.routeName,
+                    arguments: ScreenArgsBox("my title",controller.text));
+              },
+              child: Text('send data'),
+            ),
+          ),
+        ],
       ),
     );
   }
