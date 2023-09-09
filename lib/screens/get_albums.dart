@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:manapuramb2/dartexs/async/test_json.dart';
+import 'package:manapuramb2/model/album.dart';
 
 void main() => runApp(MaterialApp(
   home: Scaffold(body: AlbumApp(),),
@@ -25,7 +26,8 @@ class _AlbumAppState extends State<AlbumApp> {
   Widget build(BuildContext context) {
     return Center(
       child: FutureBuilder<Album>(
-
+        future: futureAlbum,
+        builder: (context,snapshot){},
       ),
     );
   }
