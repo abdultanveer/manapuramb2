@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manapuramb2/dartexs/async/test_json.dart';
 
 void main() => runApp(MaterialApp(
   home: Scaffold(body: AlbumApp(),),
@@ -13,8 +14,19 @@ class AlbumApp extends StatefulWidget {
 }
 
 class _AlbumAppState extends State<AlbumApp> {
+  late Future<Album> futureAlbum;
+  @override
+  void initState() {
+    super.initState();
+     futureAlbum = fetchAlbum();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(
+      child: FutureBuilder<Album>(
+
+      ),
+    );
   }
 }
