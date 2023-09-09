@@ -20,14 +20,18 @@ class _AlbumAppState extends State<AlbumApp> {
   void initState() {
     super.initState();
      futureAlbum = fetchAlbum();
+     //get those albums
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
+      //use listbuilder with the albums
       child: FutureBuilder<Album>(
         future: futureAlbum,
-        builder: (context,snapshot){},
+        builder: (context,snapshot){
+          return Text(snapshot.data!.title);
+        },
       ),
     );
   }

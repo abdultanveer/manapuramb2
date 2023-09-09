@@ -15,6 +15,8 @@ class Album {
         id: json['id'],
         title: json['title']);
   }
+
+
 }
 
 /*
