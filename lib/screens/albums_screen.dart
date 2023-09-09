@@ -25,16 +25,21 @@ class _AlbumAppState extends State<AlbumApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      //use listbuilder with the albums
-      child: FutureBuilder<List<Album>>(
-        future: listAlbums,
+    return FutureBuilder(future: listAlbums,
         builder: (context,snapshot){
-          return
-            Text(snapshot.data!.title);
-        },
-      ),
-    );
-
+      if(snapshot.hasData) {
+        return Container(
+          child: ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(snapshot.data![index].title),
+                );
+              }),
+        );
+      }
+      else return CircularProgressIndicator();
+        });
   }
 }
+
