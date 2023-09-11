@@ -41,4 +41,17 @@ class DogDao {
     print('inserted dog--'+dog.name);
     print("inserted at position ="+ position.toString());
   }
+
+
+  Future<List<Dog>> readDog() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('dogs');
+    return List.generate(maps.length, (index) {
+      var dog = Dog(id: maps[index]['id'],
+          name: maps[index]['name'],
+          age: maps[index]['age']);
+      print(dog.toString());
+      return dog;
+    });
+  }
 }

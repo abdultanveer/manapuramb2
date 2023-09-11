@@ -39,12 +39,17 @@ class _DogAppState extends State<DogApp> {
             decoration: InputDecoration(
             labelText: 'enter dog age'
           ),),
-          Text('database demo'),
+          Text('Dogs in the db are $readDogs()'),
         ],
       ),
       floatingActionButton: FloatingActionButton(onPressed: addDog,
         child: Icon(Icons.add),),
     );
+  }
+
+  String readDogs() async {
+    var dogs =  await dogDao.readDog();
+    return dogs;
   }
 
   void addDog() async{
@@ -53,4 +58,6 @@ class _DogAppState extends State<DogApp> {
     var dog = Dog(id: 2, name: name, age: int.parse(age));
     await dogDao.insertDog(dog);
   }
+
+
 }
