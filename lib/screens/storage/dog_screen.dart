@@ -13,20 +13,44 @@ void main() async{
   ));
 }
 
-class DogApp extends StatelessWidget {
+class DogApp extends StatefulWidget {
    DogApp({super.key});
 
   @override
+  State<DogApp> createState() => _DogAppState();
+}
+
+class _DogAppState extends State<DogApp> {
+  var nameController = TextEditingController();
+  var ageController = TextEditingController();
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text('database demo'),
+      appBar: AppBar(title: Text('Add dog'),),
+      body: Column(
+        children: [
+          TextField(
+            controller: nameController,
+            decoration: InputDecoration(
+            labelText: "enter dog name"
+          ),),
+          TextField(
+            controller: ageController,
+            decoration: InputDecoration(
+            labelText: 'enter dog age'
+          ),),
+          Text('database demo'),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(onPressed: addDog,
         child: Icon(Icons.add),),
     );
   }
 
   void addDog() async{
-    var dog = Dog(id: 1, name: "german shepherd", age: 2);
+    var name  = nameController.text;
+    var age = ageController.text;
+    var dog = Dog(id: 2, name: name, age: int.parse(age));
     await dogDao.insertDog(dog);
   }
 }
