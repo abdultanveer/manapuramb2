@@ -16,4 +16,10 @@ class Dog{
       'age': age
     };
   }
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return 'Dog{id: $id, name: $name, age: $age}';
+  }
 }

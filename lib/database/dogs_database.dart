@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-void main()async{
+Future<Database> createDb()async{
   WidgetsFlutterBinding.ensureInitialized();
   final database = openDatabase(
     join(await getDatabasesPath(),'doggie_database.db'),
@@ -16,5 +16,6 @@ void main()async{
     },
     version: 1
   );
+  return database;
 
 }
