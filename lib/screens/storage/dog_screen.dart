@@ -39,7 +39,11 @@ class _DogAppState extends State<DogApp> {
             decoration: InputDecoration(
             labelText: 'enter dog age'
           ),),
-          Text('Dogs in the db are $readDogs()'),
+          //Text('Dogs in the db are $readDogs()'),
+          FutureBuilder(future: readDogs(), builder: (context,snapshot){
+              return Text(snapshot.data![0].name);
+
+          })
         ],
       ),
       floatingActionButton: FloatingActionButton(onPressed: addDog,
@@ -47,7 +51,7 @@ class _DogAppState extends State<DogApp> {
     );
   }
 
-  String readDogs() async {
+  Future<List<Dog>> readDogs() async {
     var dogs =  await dogDao.readDog();
     return dogs;
   }
