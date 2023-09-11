@@ -15,7 +15,7 @@ class AlbumApp extends StatefulWidget {
 }
 
 class _AlbumAppState extends State<AlbumApp> {
-  late Future<Album> futureAlbum;
+  late Future<List<Album>> futureAlbum;
   @override
   void initState() {
     super.initState();
@@ -26,13 +26,13 @@ class _AlbumAppState extends State<AlbumApp> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      //use listbuilder with the albums
+      /*//use listbuilder with the albums
       child: FutureBuilder<Album>(
         future: futureAlbum,
         builder: (context,snapshot){
           return Text(snapshot.data!.title);
         },
-      ),
+      ),*/
     );
   }
 }
