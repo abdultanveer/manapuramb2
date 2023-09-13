@@ -5,7 +5,8 @@ import '../lib/counter.dart';
 main(){
   Counter counter = Counter();
   counter.increment();
-  int expected = 1;
+  int expected = 2;
   int actual = counter.value;
-  expect(expected,actual);
+  test('test increment method', () => expect(actual,expected));
+
 }
