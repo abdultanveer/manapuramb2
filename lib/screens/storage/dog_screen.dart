@@ -2,66 +2,66 @@ import 'package:flutter/material.dart';
 import 'package:manapuramb2/database/crud.dart';
 import 'package:manapuramb2/model/dog.dart';
 
-var dogDao =  DogDao();
+
+var dogDao = new DogDao();
 var database;
-
 void main() async{
-  database = dogDao.openDb();
-
+  database = await dogDao.openDb();
   runApp(MaterialApp(
-    home: DogApp(),
+    home: DogsApp(),
   ));
 }
 
-class DogApp extends StatefulWidget {
-   DogApp({super.key});
-
-  @override
-  State<DogApp> createState() => _DogAppState();
-}
-
-class _DogAppState extends State<DogApp> {
+class DogsApp extends StatelessWidget {
+  DogsApp({super.key});
+  var idController = TextEditingController();
   var nameController = TextEditingController();
   var ageController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add dog'),),
+      appBar: AppBar(title: Text('dogs db demo'),),
       body: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
-          TextField(
-            controller: nameController,
-            decoration: InputDecoration(
-            labelText: "enter dog name"
-          ),),
-          TextField(
-            controller: ageController,
-            decoration: InputDecoration(
-            labelText: 'enter dog age'
-          ),),
-          //Text('Dogs in the db are $readDogs()'),
-          FutureBuilder(future: readDogs(), builder: (context,snapshot){
-              return Text(snapshot.data![0].name);
-
-          })
+          TextField(controller: idController ,decoration: InputDecoration(labelText: "enter id"),),
+          TextField(controller:nameController ,decoration: InputDecoration(labelText: "enter name"),),
+          TextField(controller: ageController ,decoration: InputDecoration(labelText: "enter age"),),
+          FutureBuilder(future: getAllDogs(), builder: (context,snapshot){
+            return Flexible(
+              flex: 1,
+              child: Center(
+                child: ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context,index){
+                      return ListTile(
+                        leading: Text(snapshot.data![index].age.toString()),
+                        title: Text(snapshot.data![index].name),
+                      );
+                    }),
+              ),
+            );
+          }),
         ],
       ),
-      floatingActionButton: FloatingActionButton(onPressed: addDog,
-        child: Icon(Icons.add),),
+
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: addDog ,
+        child: Icon(Icons.add),
+      ),
     );
   }
 
-  Future<List<Dog>> readDogs() async {
-    var dogs =  await dogDao.readDog();
-    return dogs;
+  void addDog() async {
+    var dog = Dog(id: int.parse(idController.text),
+        name: nameController.text,
+        age: int.parse(ageController.text));
+    await dogDao.insertDog(dog)    ;
   }
 
-  void addDog() async{
-    var name  = nameController.text;
-    var age = ageController.text;
-    var dog = Dog(id: 2, name: name, age: int.parse(age));
-    await dogDao.insertDog(dog);
+  Future<List<Dog>> getAllDogs(){
+    return dogDao.readDog();
   }
-
-
 }
