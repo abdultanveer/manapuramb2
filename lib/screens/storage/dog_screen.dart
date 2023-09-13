@@ -36,6 +36,10 @@ class DogsApp extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final item = snapshot.data![index];
                           return Dismissible(
+                           onDismissed: (direction) {
+                             deleteDog(index);
+
+                           },
                             key: Key(item.name),
                             background: Container(color: Colors.red,),
                             child: ListTile(
@@ -69,5 +73,9 @@ class DogsApp extends StatelessWidget {
 
   Future<List<Dog>> getAllDogs() {
     return dogDao.readDog();
+  }
+
+  deleteDog(int id){
+    dogDao.deleteDog(id);
   }
 }

@@ -38,8 +38,8 @@ class DogDao {
     final db = await database;
     int position = await db.insert('dogs', dog.toMap(),
         nullColumnHack: null, conflictAlgorithm: ConflictAlgorithm.replace);
-    print('inserted dog--'+dog.name);
-    print("inserted at position ="+ position.toString());
+    print('inserted dog--' + dog.name);
+    print("inserted at position =" + position.toString());
   }
 
 
@@ -53,5 +53,19 @@ class DogDao {
       print(dog.toString());
       return dog;
     });
+  }
+
+  Future<void> deleteDog(int id) async {
+    // Get a reference to the database.
+    final db = await database;
+
+    // Remove the Dog from the database.
+    await db.delete(
+      'dogs',
+      // Use a `where` clause to delete a specific dog.
+      where: 'id = ?',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [id],
+    );
   }
 }
