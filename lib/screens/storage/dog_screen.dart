@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:manapuramb2/database/crud.dart';
 import 'package:manapuramb2/model/dog.dart';
 import 'package:manapuramb2/screens/storage/add_dog.dart';
+import 'package:manapuramb2/widgets/my_nav_drawer.dart';
 
 var dogDao = new DogDao();
 var database;
@@ -22,6 +23,7 @@ class DogsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MyDrawer(),
       appBar: AppBar(
         title: Text('dogs db demo'),
       ),
