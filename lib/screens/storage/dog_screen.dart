@@ -35,17 +35,22 @@ class DogsApp extends StatelessWidget {
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
                           final item = snapshot.data![index];
-                          return Dismissible(
-                           onDismissed: (direction) {
-                             deleteDog(index);
+                          return GestureDetector(
+                            onTap: (){
+                              print(snapshot.data![index].name);
+                            },
+                            child: Dismissible(
+                             onDismissed: (direction) {
+                               deleteDog(index);
 
-                           },
-                            key: Key(item.name),
-                            background: Container(color: Colors.red,),
-                            child: ListTile(
-                              leading:
-                                  Text(snapshot.data![index].age.toString()),
-                              title: Text(snapshot.data![index].name),
+                             },
+                              key: Key(item.name),
+                              background: Container(color: Colors.red,),
+                              child: ListTile(
+                                leading:
+                                    Text(snapshot.data![index].age.toString()),
+                                title: Text(snapshot.data![index].name),
+                              ),
                             ),
                           );
                         }),
