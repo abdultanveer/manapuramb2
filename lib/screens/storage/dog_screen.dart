@@ -9,6 +9,9 @@ var database;
 void main() async {
   database = await dogDao.openDb();
   runApp(MaterialApp(
+    routes: {
+      'add_dog_screen': (context)=> AddDog(dogDao),
+    },
     home: DogsApp(),
   ));
 }
@@ -38,6 +41,8 @@ class DogsApp extends StatelessWidget {
                           return GestureDetector(
                             onTap: (){
                               print(snapshot.data![index].name);
+                              var dog = snapshot.data![index];
+                              Navigator.pushNamed(context, 'add_dog_screen',arguments: dog );
                             },
                             child: Dismissible(
                              onDismissed: (direction) {

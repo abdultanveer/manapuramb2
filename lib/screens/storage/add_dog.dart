@@ -10,6 +10,12 @@ class AddDog extends StatelessWidget {
   var ageController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    Dog dog = ModalRoute.of(context)!.settings.arguments as Dog;
+
+    idController.text = dog.id.toString();
+    nameController.text = dog.name;
+    ageController.text = dog.age.toString();
+
     return Scaffold(
       body: Column(
         children: [
