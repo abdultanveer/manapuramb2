@@ -19,7 +19,7 @@ class _AlbumAppState extends State<AlbumApp> {
   @override
   void initState() {
     super.initState();
-     futureAlbum = fetchAlbum();
+     //futureAlbum = fetchAlbum();
      //get those albums
   }
 
