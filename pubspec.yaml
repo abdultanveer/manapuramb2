@@ -32,13 +32,12 @@ dependencies:
     sdk: flutter
   intl: ^0.18.0
   http: ^1.1.0
-
-
   cupertino_icons: ^1.0.2
   video_player: ^2.7.1
   camera: ^0.10.5+4
   path_provider: ^2.1.1
   path: ^1.8.3
+  google_maps_flutter: ^2.5.0
 
 dev_dependencies:
   flutter_test:
